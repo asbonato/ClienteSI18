@@ -25,7 +25,7 @@ public class ListaClientesActivity extends Activity {
         ListView listView = findViewById(R.id.lista_clientes);
         clientes = this.clientes();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, clientes);
+                    android.R.layout.simple_list_item_1, clientes);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
