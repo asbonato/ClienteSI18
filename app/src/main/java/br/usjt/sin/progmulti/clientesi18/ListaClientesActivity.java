@@ -3,24 +3,40 @@ package br.usjt.sin.progmulti.clientesi18;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class ListaClientesActivity extends Activity {
+    Activity activity;
+    ArrayList<String> clientes;
+    public static final String CLIENTE = "br.usjt.sin.progmulti.clientesi18.cliente";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_clientes);
-        Intent intent = getIntent();
+        activity = this;
+        final Intent intent = getIntent();
         String text = intent.getStringExtra(MainActivity.BUSCA);
         ListView listView = findViewById(R.id.lista_clientes);
-        ArrayList<String> clientes = this.clientes();
+        clientes = this.clientes();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, clientes);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent1 = new Intent(activity, DetalheClienteActivity.class);
+                intent1.putExtra(CLIENTE, clientes.get(i));
+                startActivity(intent1);
+            }
+        });
+
     }
     private ArrayList<String> busca(String chave){
         return null;
